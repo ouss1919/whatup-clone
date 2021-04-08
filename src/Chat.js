@@ -12,7 +12,8 @@ const sendMessage = (e) =>{
     e.preventDefault();
 }
 
-function Chat() {
+
+function Chat({messages}) {
     return (
         <div className="chat">
             <div className="chat__header">
@@ -34,24 +35,13 @@ function Chat() {
                 </div>
             </div>
             <div className="chat__body">
-                <p className="chat__message">
-                    <span className="chat__name">Sonny</span>
-                    This is a message
-                    <span className="chat__timestamp">{
-                        new Date().toUTCString()}</span>
-                </p>
-                <p className="chat__message">
-                    <span className="chat__name">Sonny</span>
-                    This is a message
-                    <span className="chat__timestamp">{
-                        new Date().toUTCString()}</span>
-                </p>
-                <p className="chat__message chat__reciver">
-                    <span className="chat__name">Sonny</span>
-                    This is a message
-                    <span className="chat__timestamp">{
-                        new Date().toUTCString()}</span>
-                </p>
+                {messages.map(message =>(
+                    <p className={`chat__message ${message.received && "chat__reciver"}`}>
+                        <span className="chat__name">{message.name}</span>
+                            {message.message}
+                        <span className="chat__timestamp">{message.timestamp}</span> 
+                    </p>
+                ))}
             </div>
             <div className="chat__footer">
                         <InsertEmoticonIcon />
